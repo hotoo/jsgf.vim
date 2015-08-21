@@ -1,4 +1,5 @@
 
+" http://usevim.com/2013/01/04/vim101-jumping/
 function! InitJavaScript()
   setl suffixesadd+=.js
   let node_modules = finddir('node_modules', expand('%:p:h') . ';')
@@ -10,26 +11,28 @@ endfunction
 autocmd FileType javascript call InitJavaScript()
 
 function! CommonJSGFOpen(filepath)
-  " The directory name (e.g. FILE_NAME) is passed as the parameter
   let filename = a:filepath
   if isdirectory(filename)
+    let pkg_file = filename . "/package.json"
 
-    if filereadable(filename . "/package.json")
+    if filereadable(pkg_file)
 
       " node_modules.
-      let pkg = readfile(filename . '/package.json')
+      let pkg = readfile(pkg_file)
       let main = matchstr(pkg, '"main" *: *"\([^"]\+\)"')
-      let main = substitute(main, '.*"main" *: *"', '', '')
-      let main = substitute(main, '".*', '', '')
       if main == ""
         let main = "index.js"
+      else
+        let main = substitute(main, '.*"main" *: *"', '', '')
+        let main = substitute(main, '".*', '', '')
       endif
       let filename = filename . "/" . main
+      " package.json:main = xxx, without `.js`
       if !filereadable(filename)
         let filename = filename . '.js'
       endif
       if !filereadable(filename)
-        echoerr "Can't open file: " . filename
+        echoerr "E447: Can't find file \"" . filename . "\" in path"
         return
       endif
 
@@ -37,6 +40,7 @@ function! CommonJSGFOpen(filepath)
 
       " relative file path.
       let filename = filename . '/index.js'
+
     endif
   endif
 
