@@ -2,13 +2,14 @@
 " http://usevim.com/2013/01/04/vim101-jumping/
 function! InitJavaScript()
   setl suffixesadd+=.js
+  setl isfname+=@-@
   let node_modules = finddir('node_modules', expand('%:p:h') . ';')
   exec "setl path+=". node_modules
   "let project_root=findfile('package.json', expand('%:p:h') . ';')
   "exec "setl path+=". fnamemodify(project_root, ':p:h') . "/node_modules"
 endfunction
 
-autocmd FileType javascript call InitJavaScript()
+autocmd FileType javascript,json call InitJavaScript()
 
 function! CommonJSGFOpen(filepath)
   let filename = a:filepath
@@ -47,4 +48,4 @@ function! CommonJSGFOpen(filepath)
   exe 'e' filename
 endfunction
 
-autocmd FileType javascript nmap gf :call CommonJSGFOpen("<C-R><C-P>")<CR>
+autocmd FileType javascript,json nmap gf :call CommonJSGFOpen("<C-R><C-P>")<CR>
