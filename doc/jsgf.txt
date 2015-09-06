@@ -1,0 +1,55 @@
+*jsgf.txt*   Imporved GF for JavaScript
+
+
+		      by 闲耘
+
+==============================================================================
+CONTENTS                                                    *jsgf-contents*
+
+    1. Intro                                                         |jsgf|
+    2. Mappings                                             |jsgf-mappings|
+    3. Functions                                           |jsgf-functions|
+    4. License
+
+==============================================================================
+1. Intro                                                             *jsgf*
+
+JSGF is an imporved `gf` mappings for JavaScript. Support CommonJS for now.
+
+For example in JavaScript file: >
+  const ma = require('module-a');
+  const ma_index = require('module-a/');
+  const ma_file = require('module-a/file');
+  const mb = require('@group/module-b');
+  const mc = require('./module-c');
+  const md = require('../path/module-c');
+<
+
+Example in package.json: >
+  {
+    "dependencies": {
+      "module-a": "*",
+      "@group/module-b": "*"
+    }
+  }
+<
+
+==============================================================================
+2. Mappings                                                    *jsgf-mapping*
+
+[count]gf         Edit the file whose name is under of after the cursor.
+                  Mnemonic "goto file".
+
+==============================================================================
+3. Functions                                                 *jsgf-functions*
+
+|InitJSGF()|          Init JavaScript 'path' and suffix configure.
+
+|JSGF(filepath)|      Edit file in 'path'.
+
+==============================================================================
+4. License                                                     *jsgf-license*
+
+[MIT License](http://hotoo.mit-license.org)
+
+ vim:tw=78:ts=8:ft=help

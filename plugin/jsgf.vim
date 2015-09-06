@@ -1,6 +1,13 @@
+" Name: jsgf (Goto File imporve for JavaScript)
+" Author: 闲耘 <hotoo.cn@gmail.com>
+" URL: https://github.com/hotoo/jsgf.vim
 
-" http://usevim.com/2013/01/04/vim101-jumping/
-function! InitJavaScript()
+if exists('loaded_jsgf_plugin')
+	finish
+endif
+let loaded_jsgf_plugin = 1
+
+function! InitJSGF()
   setl suffixesadd+=.js
   setl isfname+=@-@
   let node_modules = finddir('node_modules', expand('%:p:h') . ';')
@@ -9,9 +16,7 @@ function! InitJavaScript()
   "exec "setl path+=". fnamemodify(project_root, ':p:h') . "/node_modules"
 endfunction
 
-autocmd FileType javascript,json call InitJavaScript()
-
-function! CommonJSGFOpen(filepath)
+function! JSGF(filepath)
   let filename = a:filepath
   if isdirectory(filename)
     let pkg_file = filename . "/package.json"
@@ -48,4 +53,5 @@ function! CommonJSGFOpen(filepath)
   exe 'e' filename
 endfunction
 
-autocmd FileType javascript,json nmap gf :call CommonJSGFOpen("<C-R><C-P>")<CR>
+autocmd FileType javascript,json call InitJSGF()
+autocmd FileType javascript,json nmap <buffer> gf :call JSGF("<C-R><C-P>")<CR>
