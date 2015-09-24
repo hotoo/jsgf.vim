@@ -8,7 +8,7 @@ endif
 let loaded_jsgf_plugin = 1
 
 function! InitJSGF()
-  setl suffixesadd+=.js
+  setl suffixesadd+=.js,.jsx
   setl isfname+=@-@
   let node_modules = finddir('node_modules', expand('%:p:h') . ';')
   exec "setl path+=". node_modules
