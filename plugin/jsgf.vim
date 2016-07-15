@@ -8,12 +8,30 @@ endif
 let loaded_jsgf_plugin = 1
 
 function! InitJSGF()
-  setl suffixesadd+=.js,.jsx,.ts,.tsx
-  setl isfname+=@-@
+  setlocal suffixesadd+=.js,.jsx,.ts,.tsx
+  setlocal isfname+=@-@
+  " setlocal includeexpr=v:fname.'/index'
   let node_modules = finddir('node_modules', expand('%:p:h') . ';')
-  exec "setl path+=". node_modules
-  "let project_root=findfile('package.json', expand('%:p:h') . ';')
-  "exec "setl path+=". fnamemodify(project_root, ':p:h') . "/node_modules"
+  exec "setlocal path+=" . node_modules
+  " setlocal path+=node_modules
+  " let project_root=findfile('package.json', expand('%:p:h') . ';')
+  " execute "setlocal path+=". fnamemodify(project_root, ':p:h') . "/node_modules"
+endfunction
+
+function! FindFileOrDir(filename)
+  let filenames = [
+    \ a:filename,
+    \ a:filename . '.js',
+    \ a:filename . '.jsx',
+    \ a:filename . '.ts',
+    \ a:filename . '.tsx'
+  \ ]
+  for filename in filenames
+    if filereadable(filename)
+      return filename
+    endif
+  endfor
+  return filename
 endfunction
 
 function! JSGF(filepath)
@@ -27,27 +45,27 @@ function! JSGF(filepath)
       let pkg = readfile(pkg_file)
       let main = matchstr(pkg, '"main" *: *"\([^"]\+\)"')
       if main == ""
-        let main = "index.js"
+        " Not set `main` in package.json
+        let main = "index"
       else
         let main = substitute(main, '.*"main" *: *"', '', '')
         let main = substitute(main, '".*', '', '')
       endif
-      let filename = filename . "/" . main
-      " package.json:main = xxx, without `.js`
-      if !filereadable(filename)
-        let filename = filename . '.js'
-      endif
-      if !filereadable(filename)
-        echoerr "E447: Can't find file \"" . filename . "\" in path"
-        return
-      endif
+      let filename = FindFileOrDir(filename . "/" . main)
 
     else
 
       " relative file path.
-      let filename = filename . '/index.js'
+      let filename = FindFileOrDir(filename . '/index.js')
 
     endif
+  else
+    let filename = FindFileOrDir(filename)
+  endif
+
+  if !filereadable(filename)
+    echoerr "E447: Can't find file \"" . filename . "\" in path [jsgf]."
+    return
   endif
 
   exe 'e' filename

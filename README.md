@@ -27,6 +27,10 @@ Maybe you need `autochdir` option in .vimrc
 set autochdir
 ```
 
+## Test
+
+`vim ./test/jsgf.test.js` and `gf`, `<Ctrl-o>` to test.
+
 ## LICENSE
 
 [MIT](http://hotoo.mit-license.org/)
