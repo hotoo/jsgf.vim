@@ -8,7 +8,7 @@ endif
 let loaded_jsgf_plugin = 1
 
 function! InitJSGF()
-  setl suffixesadd+=.js,.jsx
+  setl suffixesadd+=.js,.jsx,.ts,.tsx
   setl isfname+=@-@
   let node_modules = finddir('node_modules', expand('%:p:h') . ';')
   exec "setl path+=". node_modules
@@ -53,5 +53,5 @@ function! JSGF(filepath)
   exe 'e' filename
 endfunction
 
-autocmd FileType javascript,json call InitJSGF()
-autocmd FileType javascript,json nmap <buffer> gf :call JSGF("<C-R><C-P>")<CR>
+autocmd FileType javascript,json,typescript call InitJSGF()
+autocmd FileType javascript,json,typescript nmap <buffer> gf :call JSGF("<C-R><C-P>")<CR>

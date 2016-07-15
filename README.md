@@ -5,7 +5,8 @@ Imporved JavaScript `gf` command.
 Support:
 
 * CommonJS (node_modules, package.json:main, /index.js)
-* *.jsx
+* React (*.jsx)
+* TypeScript (*.ts, *.tsx)
 
 ## INSTALL
 
