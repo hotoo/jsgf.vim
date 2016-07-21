@@ -12,10 +12,10 @@ function! InitJSGF()
   setlocal isfname+=@-@
   " setlocal includeexpr=v:fname.'/index'
   let node_modules = finddir('node_modules', expand('%:p:h') . ';')
-  execute "setlocal path+=" . node_modules
+  execute 'setlocal path+=' . node_modules
   " setlocal path+=node_modules
   " let project_root=findfile('package.json', expand('%:p:h') . ';')
-  " execute "setlocal path+=". fnamemodify(project_root, ':p:h') . "/node_modules"
+  " execute 'setlocal path+=' . fnamemodify(project_root, ':p:h') . '/node_modules'
 endfunction
 
 function! FindFileOrDir(filename)
@@ -31,42 +31,48 @@ function! FindFileOrDir(filename)
       return fname
     endif
   endfor
-  return a:filename
+  return ''
 endfunction
 
 function! JSGF(filepath)
   let filename = a:filepath
   if isdirectory(filename)
-    let pkg_file = filename . "/package.json"
+    let pkg_file = filename . '/package.json'
 
     if filereadable(pkg_file)
 
       " node_modules.
       let pkg = readfile(pkg_file)
       let main = matchstr(pkg, '"main" *: *"\([^"]\+\)"')
-      if main == ""
+      if main == ''
         " Not set `main` in package.json
-        let main = "index"
+        let main = 'index'
       else
         let main = substitute(main, '.*"main" *: *"', '', '')
         let main = substitute(main, '".*', '', '')
       endif
-      let filename = filename . "/" . main
+      let filename = filename . '/' . main
 
     else
 
-      if (FindFileOrDir(filename) == filename)
+      if (FindFileOrDir(filename) == '')
         " relative file path.
         let filename = filename . '/index.js'
       endif
 
     endif
+
+    let fname = FindFileOrDir(filename)
+    if (fname == '')
+      let filename = a:filepath
+    else
+      let filename = fname
+    endif
+
   endif
 
-  let filename = FindFileOrDir(filename)
-
-  if !filereadable(filename)
-    echoerr "E447: Can't find file \"" . filename . "\" in path [jsgf.vim]."
+  if !filereadable(filename) && !isdirectory(filename)
+    echoerr 'E447: Can not find file "' . filename . '" in path [jsgf.vim].'
     return
   endif
 
