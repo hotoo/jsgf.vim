@@ -7,6 +7,10 @@ require('./index/');
 require('./index/index');
 require('./index/index.js');
 
+require('./dir-no-index/');
+require('./dir-no-index/test');
+require('./dir-no-index/test.js');
+
 require('./js');
 require('./js.js');
 require('./jsx');
