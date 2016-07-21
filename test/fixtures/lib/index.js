@@ -1,5 +1,12 @@
 'use strict';
 
+require('./');
+require('./index');
+
+require('./index/');
+require('./index/index');
+require('./index/index.js');
+
 require('./js');
 require('./js.js');
 require('./jsx');

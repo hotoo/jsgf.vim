@@ -12,7 +12,7 @@ function! InitJSGF()
   setlocal isfname+=@-@
   " setlocal includeexpr=v:fname.'/index'
   let node_modules = finddir('node_modules', expand('%:p:h') . ';')
-  exec "setlocal path+=" . node_modules
+  execute "setlocal path+=" . node_modules
   " setlocal path+=node_modules
   " let project_root=findfile('package.json', expand('%:p:h') . ';')
   " execute "setlocal path+=". fnamemodify(project_root, ':p:h') . "/node_modules"
@@ -26,12 +26,12 @@ function! FindFileOrDir(filename)
     \ a:filename . '.ts',
     \ a:filename . '.tsx'
   \ ]
-  for filename in filenames
-    if filereadable(filename)
-      return filename
+  for fname in filenames
+    if filereadable(fname)
+      return fname
     endif
   endfor
-  return filename
+  return a:filename
 endfunction
 
 function! JSGF(filepath)
@@ -51,24 +51,26 @@ function! JSGF(filepath)
         let main = substitute(main, '.*"main" *: *"', '', '')
         let main = substitute(main, '".*', '', '')
       endif
-      let filename = FindFileOrDir(filename . "/" . main)
+      let filename = filename . "/" . main
 
     else
 
-      " relative file path.
-      let filename = FindFileOrDir(filename . '/index.js')
+      if (FindFileOrDir(filename) == filename)
+        " relative file path.
+        let filename = filename . '/index.js'
+      endif
 
     endif
-  else
-    let filename = FindFileOrDir(filename)
   endif
 
+  let filename = FindFileOrDir(filename)
+
   if !filereadable(filename)
-    echoerr "E447: Can't find file \"" . filename . "\" in path [jsgf]."
+    echoerr "E447: Can't find file \"" . filename . "\" in path [jsgf.vim]."
     return
   endif
 
-  exe 'e' filename
+  execute 'e' filename
 endfunction
 
 autocmd FileType javascript,json,typescript call InitJSGF()

@@ -1,6 +1,6 @@
 'use strict';
 
-// ts.ts (TypeScript)
+// tsx.tsx (TypeScript)
 //
 // Use <Ctrl-o> for back.
 
