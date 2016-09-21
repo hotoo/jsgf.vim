@@ -22,6 +22,7 @@ function! FindFileOrDir(filename)
   let filenames = [
     \ a:filename,
     \ a:filename . '.js',
+    \ a:filename . '.vue',
     \ a:filename . '.json',
     \ a:filename . '.jsx',
     \ a:filename . '.ts',
