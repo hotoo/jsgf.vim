@@ -8,7 +8,7 @@ endif
 let loaded_jsgf_plugin = 1
 
 function! InitJSGF()
-  setlocal suffixesadd+=.js,.json,.jsx,.ts,.tsx
+  setlocal suffixesadd+=.js,.vue,.json,.jsx,.ts,.tsx
   setlocal isfname+=@-@
   " setlocal includeexpr=v:fname.'/index'
   let node_modules = finddir('node_modules', expand('%:p:h') . ';')
@@ -22,6 +22,7 @@ function! FindFileOrDir(filename)
   let filenames = [
     \ a:filename,
     \ a:filename . '.js',
+    \ a:filename . '.vue',
     \ a:filename . '.json',
     \ a:filename . '.jsx',
     \ a:filename . '.ts',
@@ -80,6 +81,6 @@ function! JSGF(filepath, open)
   execute a:open filename
 endfunction
 
-autocmd FileType javascript,json,typescript call InitJSGF()
-autocmd FileType javascript,json,typescript nmap <buffer> gf :call JSGF('<C-R><C-P>', 'e')<CR>
-autocmd FileType javascript,json,typescript nmap <buffer> <C-w>gf :call JSGF('<C-R><C-P>', 'tabnew')<CR>
+autocmd FileType javascript,json,typescript,vue call InitJSGF()
+autocmd FileType javascript,json,typescript,vue nmap <buffer> gf :call JSGF('<C-R><C-P>', 'e')<CR>
+autocmd FileType javascript,json,typescript,vue nmap <buffer> <C-w>gf :call JSGF('<C-R><C-P>', 'tabnew')<CR>

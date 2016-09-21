@@ -5,6 +5,7 @@ Imporved JavaScript `gf` command.
 Support:
 
 * CommonJS (node_modules, package.json:main, /index.js)
+* Vue.js (*.vue)
 * JSON (*.json)
 * React (*.jsx)
 * TypeScript (*.ts, *.tsx)
