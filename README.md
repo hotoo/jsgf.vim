@@ -1,4 +1,4 @@
-# JSGF: imporved GF for JavaScript
+# JSGF: imporved `gf` for JavaScript
 
 Imporved JavaScript `gf` command.
 
@@ -9,16 +9,23 @@ Support:
 * React (*.jsx)
 * TypeScript (*.ts, *.tsx)
 
-## INSTALL
+## Installation
 
 Vundle:
 
 ```viml
 Plugin 'hotoo/jsgf.vim'
 ```
-## USAGE
+## Usage
 
-`gf` in normal mode.
+- `gf` in normal mode: goto file in current buffer.
+- `<C-w>gf` in normal mode: open file in new tab.
+
+## Document
+
+```
+:help gf
+```
 
 ## Options
 

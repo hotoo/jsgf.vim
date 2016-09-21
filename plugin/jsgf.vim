@@ -35,7 +35,7 @@ function! FindFileOrDir(filename)
   return ''
 endfunction
 
-function! JSGF(filepath)
+function! JSGF(filepath, open)
   let filename = a:filepath
   if isdirectory(filename)
     let pkg_file = filename . '/package.json'
@@ -77,8 +77,9 @@ function! JSGF(filepath)
     return
   endif
 
-  execute 'e' filename
+  execute a:open filename
 endfunction
 
 autocmd FileType javascript,json,typescript call InitJSGF()
-autocmd FileType javascript,json,typescript nmap <buffer> gf :call JSGF("<C-R><C-P>")<CR>
+autocmd FileType javascript,json,typescript nmap <buffer> gf :call JSGF('<C-R><C-P>', 'e')<CR>
+autocmd FileType javascript,json,typescript nmap <buffer> <C-w>gf :call JSGF('<C-R><C-P>', 'tabnew')<CR>
