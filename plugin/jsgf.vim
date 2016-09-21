@@ -8,7 +8,7 @@ endif
 let loaded_jsgf_plugin = 1
 
 function! InitJSGF()
-  setlocal suffixesadd+=.js,.jsx,.ts,.tsx
+  setlocal suffixesadd+=.js,.json,.jsx,.ts,.tsx
   setlocal isfname+=@-@
   " setlocal includeexpr=v:fname.'/index'
   let node_modules = finddir('node_modules', expand('%:p:h') . ';')
@@ -22,6 +22,7 @@ function! FindFileOrDir(filename)
   let filenames = [
     \ a:filename,
     \ a:filename . '.js',
+    \ a:filename . '.json',
     \ a:filename . '.jsx',
     \ a:filename . '.ts',
     \ a:filename . '.tsx'
