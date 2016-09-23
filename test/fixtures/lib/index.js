@@ -41,3 +41,7 @@ require('deps-ts-main-ts'); // ../node_modules/deps-ts-main-ts, with "main": "ma
 require('deps-tsx'); // ../node_modules/deps-tsx, without "main" in package.json, exists file "index.tsx"
 require('deps-tsx-main'); // ../node_modules/deps-tsx-main, with "main": "main" in package.json, exists file "main.tsx"
 require('deps-tsx-main-tsx'); // ../node_modules/deps-tsx-main-tsx, with "main": "main.tsx" in package.json, exists file "main.tsx"
+
+require('deps-vue');
+require('deps-vue-main');
+require('deps-vue-main-vue');
