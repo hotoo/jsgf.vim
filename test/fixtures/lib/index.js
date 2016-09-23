@@ -45,3 +45,7 @@ require('deps-tsx-main-tsx'); // ../node_modules/deps-tsx-main-tsx, with "main":
 require('deps-vue');
 require('deps-vue-main');
 require('deps-vue-main-vue');
+
+require('deps-json');
+require('deps-json-main');
+require('deps-json-main-json');
