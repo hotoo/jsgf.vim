@@ -15,18 +15,17 @@ function! InitJSGF()
 endfunction
 
 function! FindFileOrDir(filename)
-  let filenames = [
-    \ a:filename,
-    \ a:filename . '.js',
-    \ a:filename . '.vue',
-    \ a:filename . '.json',
-    \ a:filename . '.jsx',
-    \ a:filename . '.ts',
-    \ a:filename . '.tsx'
-  \ ]
-  for fname in filenames
-    if filereadable(fname)
-      return fname
+  if filereadable(a:filename)
+    return a:filename
+  endif
+
+  let suffixes = split(&suffixesadd, ',')
+  let suffixes = filter(suffixes, 'count(suffixes, v:val) == 1')
+
+  for s in suffixes
+    let candidate = a:filename . s
+    if filereadable(candidate)
+      return candidate
     endif
   endfor
   return ''
