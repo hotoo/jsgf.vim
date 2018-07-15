@@ -53,9 +53,9 @@ function! JSGF(filepath, open)
 
     else
 
-      if (FindFileOrDir(filename) == '')
+      if (FindFileOrDir(filename . '/index') != '')
         " relative file path.
-        let filename = filename . '/index.js'
+        let filename = filename . '/index'
       endif
 
     endif
