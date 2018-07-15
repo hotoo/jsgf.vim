@@ -1,10 +1,10 @@
-# JSGF: imporved `gf` for JavaScript
+# JSGF: improved `gf` for JavaScript
 
-Imporved JavaScript `gf` command.
+This plugin improves Vim's `gf` command when navigating JavaScript imports.
 
 Support:
 
-* CommonJS (node_modules, package.json:main, /index.js)
+* CommonJS (node_modules, package.json:main, /index.<supported suffixes>)
 * Vue.js (*.vue)
 * JSON (*.json)
 * React (*.jsx)
