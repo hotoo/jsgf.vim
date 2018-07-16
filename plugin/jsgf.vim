@@ -33,11 +33,13 @@ endfunction
 
 function! JSGF(filepath, open)
   let filename = a:filepath
+
   if isdirectory(filename)
     let pkg_file = filename . '/package.json'
-
-    if filereadable(pkg_file)
-
+    if (FindFileOrDir(filename . '/index') != '')
+      " relative file path.
+      let filename = filename . '/index'
+    elseif filereadable(pkg_file)
       " node_modules.
       let pkg = readfile(pkg_file)
       let main = matchstr(pkg, '"main" *: *"\([^"]\+\)"')
@@ -49,14 +51,6 @@ function! JSGF(filepath, open)
         let main = substitute(main, '".*', '', '')
       endif
       let filename = filename . '/' . main
-
-    else
-
-      if (FindFileOrDir(filename . '/index') != '')
-        " relative file path.
-        let filename = filename . '/index'
-      endif
-
     endif
 
     let fname = FindFileOrDir(filename)
