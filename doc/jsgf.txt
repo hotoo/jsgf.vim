@@ -9,7 +9,8 @@ CONTENTS                                                    *jsgf-contents*
     1. Intro                                                         |jsgf|
     2. Mappings                                             |jsgf-mappings|
     3. Functions                                           |jsgf-functions|
-    4. License
+    4. Options                                               |jsgf-options|
+    5. License
 
 ==============================================================================
 1. Intro                                                             *jsgf*
@@ -48,7 +49,15 @@ Example in package.json: >
 |JSGF(filepath)|      Edit file in 'path'.
 
 ==============================================================================
-4. License                                                     *jsgf-license*
+4. Options                                                     *jsgf-options*
+
+|g:jsgf_option_open|
+
+open file method, default is 'edit'.
+we can set it by 'new', 'tabnew', 'vnew'.
+
+==============================================================================
+5. License                                                     *jsgf-license*
 
 [MIT License](http://hotoo.mit-license.org)
 

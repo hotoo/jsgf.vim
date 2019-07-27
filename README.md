@@ -36,6 +36,14 @@ Maybe you need `autochdir` option in .vimrc
 set autochdir
 ```
 
+### g:jsgf_option_open
+
+Open file method, default is 'edit', you can use 'new', 'tabnew', or 'vnew'.
+
+```viml
+let g:jsgf_option_open = 'vnew'
+```
+
 ## Test
 
 `vim ./test/jsgf.test.js` and `gf`, `<Ctrl-o>` to test.
