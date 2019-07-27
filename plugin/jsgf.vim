@@ -10,27 +10,22 @@ let loaded_jsgf_plugin = 1
 function! InitJSGF()
   setlocal suffixesadd+=.js,.vue,.json,.jsx,.ts,.tsx
   setlocal isfname+=@-@
-  " setlocal includeexpr=v:fname.'/index'
   let node_modules = finddir('node_modules', expand('%:p:h') . ';')
   execute 'setlocal path+=' . node_modules
-  " setlocal path+=node_modules
-  " let project_root=findfile('package.json', expand('%:p:h') . ';')
-  " execute 'setlocal path+=' . fnamemodify(project_root, ':p:h') . '/node_modules'
 endfunction
 
 function! FindFileOrDir(filename)
-  let filenames = [
-    \ a:filename,
-    \ a:filename . '.js',
-    \ a:filename . '.vue',
-    \ a:filename . '.json',
-    \ a:filename . '.jsx',
-    \ a:filename . '.ts',
-    \ a:filename . '.tsx'
-  \ ]
-  for fname in filenames
-    if filereadable(fname)
-      return fname
+  if filereadable(a:filename)
+    return a:filename
+  endif
+
+  let suffixes = split(&suffixesadd, ',')
+  let suffixes = filter(suffixes, 'count(suffixes, v:val) == 1')
+
+  for s in suffixes
+    let candidate = a:filename . s
+    if filereadable(candidate)
+      return candidate
     endif
   endfor
   return ''
@@ -38,11 +33,10 @@ endfunction
 
 function! JSGF(filepath, open)
   let filename = a:filepath
+
   if isdirectory(filename)
     let pkg_file = filename . '/package.json'
-
     if filereadable(pkg_file)
-
       " node_modules.
       let pkg = readfile(pkg_file)
       let main = matchstr(pkg, '"main" *: *"\([^"]\+\)"')
@@ -54,14 +48,9 @@ function! JSGF(filepath, open)
         let main = substitute(main, '".*', '', '')
       endif
       let filename = filename . '/' . main
-
-    else
-
-      if (FindFileOrDir(filename) == '')
-        " relative file path.
-        let filename = filename . '/index.js'
-      endif
-
+    elseif (FindFileOrDir(filename . '/index') != '')
+      " relative file path.
+      let filename = filename . '/index'
     endif
 
     let fname = FindFileOrDir(filename)
