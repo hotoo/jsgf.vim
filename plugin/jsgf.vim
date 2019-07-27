@@ -7,6 +7,10 @@ if exists('loaded_jsgf_plugin')
 endif
 let loaded_jsgf_plugin = 1
 
+if !exists('g:jsgf_option_open')
+  let g:jsgf_option_open = 'e'
+endif
+
 function! InitJSGF()
   setlocal suffixesadd+=.js,.vue,.json,.jsx,.ts,.tsx
   setlocal isfname+=@-@
@@ -71,5 +75,5 @@ function! JSGF(filepath, open)
 endfunction
 
 autocmd FileType javascript,json,typescript,vue call InitJSGF()
-autocmd FileType javascript,json,typescript,vue nmap <buffer> gf :call JSGF('<C-R><C-P>', 'e')<CR>
+autocmd FileType javascript,json,typescript,vue nmap <buffer> gf :call JSGF('<C-R><C-P>', g:jsgf_option_open)<CR>
 autocmd FileType javascript,json,typescript,vue nmap <buffer> <C-w>gf :call JSGF('<C-R><C-P>', 'tabnew')<CR>
