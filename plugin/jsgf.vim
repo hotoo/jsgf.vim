@@ -75,5 +75,5 @@ function! JSGF(filepath, open)
 endfunction
 
 autocmd FileType javascript,json,typescript,vue call InitJSGF()
-autocmd FileType javascript,json,typescript,vue nmap <buffer> gf :call JSGF('<C-R><C-P>', g:jsgf_option_open)<CR>
-autocmd FileType javascript,json,typescript,vue nmap <buffer> <C-w>gf :call JSGF('<C-R><C-P>', 'tabnew')<CR>
+autocmd FileType javascript,json,typescript,vue nmap <buffer> gf :call JSGF('<C-R><C-P>', g:jsgf_option_open)<CR><CR>
+autocmd FileType javascript,json,typescript,vue nmap <buffer> <C-w>gf :call JSGF('<C-R><C-P>', 'tabnew')<CR><CR>
