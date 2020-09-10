@@ -14,8 +14,15 @@ endif
 function! InitJSGF()
   setlocal suffixesadd+=.js,.vue,.json,.jsx,.ts,.tsx
   setlocal isfname+=@-@
+
   let node_modules = finddir('node_modules', expand('%:p:h') . ';')
+  let srcRoot = finddir('src', expand('%:p:h') . '.;')
+  let pkgJson = findfile('package.json', expand('%:p') . '.;')
+  let pkgJsonRoot = '/' . join(split(l:pkgJson, '/')[0:-2], '/')
+
   execute 'setlocal path+=' . node_modules
+  execute 'setlocal path+=' . srcRoot
+  execute 'setlocal path+=' . pkgJsonRoot
 endfunction
 
 function! FindFileOrDir(filename)
@@ -74,6 +81,6 @@ function! JSGF(filepath, open)
   execute a:open filename
 endfunction
 
-autocmd FileType javascript,json,typescript,vue call InitJSGF()
-autocmd FileType javascript,json,typescript,vue nmap <buffer> gf :call JSGF('<C-R><C-P>', g:jsgf_option_open)<CR><CR>
-autocmd FileType javascript,json,typescript,vue nmap <buffer> <C-w>gf :call JSGF('<C-R><C-P>', 'tabnew')<CR><CR>
+autocmd FileType javascript,javascriptreact,typescriptreact,json,typescript,vue call InitJSGF()
+autocmd FileType javascript,javascriptreact,typescriptreact,json,typescript,vue nmap <buffer> gf :call JSGF('<C-R><C-P>', g:jsgf_option_open)<CR><CR>
+autocmd FileType javascript,javascriptreact,typescriptreact,json,typescript,vue nmap <buffer> <C-w>gf :call JSGF('<C-R><C-P>', 'tabnew')<CR><CR>

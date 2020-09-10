@@ -49,3 +49,7 @@ require('deps-vue-main-vue');
 require('deps-json');
 require('deps-json-main');
 require('deps-json-main-json');
+
+require('../components/AwesomeComponent');
+require('../components/AwesomeComponent.jsx');
+require('components/AwesomeComponent.jsx');
