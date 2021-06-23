@@ -12,7 +12,7 @@ if !exists('g:jsgf_option_open')
 endif
 
 function! InitJSGF()
-  setlocal suffixesadd+=.js,.vue,.json,.jsx,.ts,.tsx
+  setlocal suffixesadd+=.ts,.tsx,.jsx,.vue,.json,.js
   setlocal isfname+=@-@
 
   let node_modules = finddir('node_modules', expand('%:p:h') . ';')
