@@ -27,8 +27,17 @@ require('./scss.scss');
 require('./styl.styl');
 
 require('deps-js'); // ../node_modules/deps-js, without "main" in package.json, exists file "index.js"
-require('deps-js-main'); // ../node_modules/deps-js-main, with "main": "main" in package.json, exists file "main.js"
-require('deps-js-main-js'); // ../node_modules/deps-js-main-js, with "main": "main.js" in package.json, exists file "main.js"
+require('deps-js-main'); // ../node_modules/deps-js-main, with `"main": "main"` in package.json, exists file "main.js"
+require('deps-js-main-js'); // ../node_modules/deps-js-main-js, with `"main": "main.js"` in package.json, exists file "main.js"
+
+import moduleA from 'deps-es-module'; // ../node_modules/deps-es-module, with `"module": "es/module"` in package.json, exists file "es/module.js"
+import moduleB from 'deps-es-module-js'; // ../node_modules/deps-es-module-js, with `"module": "es/module.js"` in package.json, exists file "es/module.js"
+
+import moduleC from 'deps-es-module-main'; // ../node_modules/deps-es-module-main, with `"module": "es/module"` and `"main": "lib/main"` in package.json, exists file "es/module.js" and "lib/main.js"
+import moduleD from 'deps-es-module-main-js'; // ../node_modules/deps-es-module-main, with `"module": "es/module.js"` and `"main": "lib/main.js"` in package.json, exists file "es/module.js" and "lib/main.js"
+
+require('deps-js-browser'); // ../node_modules/deps-js-browser, with `"browser": "browser"` in package.json, exists file "browser.js"
+require('deps-js-browser-js'); // ../node_modules/deps-js-browser-js, with `"browser": "browser.js"` in package.json, exists file "browser.js"
 
 require('deps-jsx'); // ../node_modules/deps-jsx, without "main" in package.json, exists file "main.jsx"
 require('deps-jsx-main'); // ../node_modules/deps-jsx-main, with "main": "main" in package.json, exists file "main.jsx"
