@@ -10,9 +10,6 @@ let loaded_jsgf_plugin = 1
 if !exists('g:jsgf_option_open')
   let g:jsgf_option_open = 'e'
 endif
-" `:help +cmd`
-" tmp +cmd variable for search and goto target line where define method.
-let b:jsgf_plus_cmd = ''
 
 function! InitJSGF()
   setlocal suffixesadd+=.ts,.tsx,.jsx,.vue,.json,.js
@@ -79,6 +76,12 @@ function! JSGF(filepath, open)
   if !filereadable(filename) && !isdirectory(filename)
     echoerr 'E447: Can not find file "' . filename . '" in path [jsgf.vim].'
     return
+  endif
+
+  " `:help +cmd`
+  " tmp +cmd variable for search and goto target line where define method.
+  if !exists('b:jsgf_plus_cmd')
+    let b:jsgf_plus_cmd = ''
   endif
 
   execute a:open b:jsgf_plus_cmd filename
