@@ -10,6 +10,9 @@ let loaded_jsgf_plugin = 1
 if !exists('g:jsgf_option_open')
   let g:jsgf_option_open = 'e'
 endif
+" `:help +cmd`
+" tmp +cmd variable for search and goto target line where define method.
+let b:jsgf_plus_cmd = ''
 
 function! InitJSGF()
   setlocal suffixesadd+=.ts,.tsx,.jsx,.vue,.json,.js
@@ -78,7 +81,8 @@ function! JSGF(filepath, open)
     return
   endif
 
-  execute a:open filename
+  execute a:open b:jsgf_plus_cmd filename
+  let b:jsgf_plus_cmd = ''
 endfunction
 
 autocmd FileType javascript,javascriptreact,typescriptreact,json,typescript,vue call InitJSGF()
