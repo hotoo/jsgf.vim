@@ -42,6 +42,17 @@ function! FindFileOrDir(filename)
   return ''
 endfunction
 
+function! GetJSONFieldValue(json, fieldName)
+  let re_main = '.*"' . a:fieldName . '"\s*:\s*"\([^"]\+\)".*'
+  let s_main = matchstr(a:json, re_main)
+  if s_main == ''
+    return ''
+  endif
+
+  let value = substitute(s_main, re_main, '\1', '')
+  return value
+endfunction
+
 function! JSGF(filepath, open)
   let filename = a:filepath
 
@@ -50,13 +61,15 @@ function! JSGF(filepath, open)
     if filereadable(pkg_file)
       " node_modules.
       let pkg = readfile(pkg_file)
-      let main = matchstr(pkg, '"main" *: *"\([^"]\+\)"')
+      let main = GetJSONFieldValue(pkg, 'module')
       if main == ''
-        " Not set `main` in package.json
+        let main = GetJSONFieldValue(pkg, 'main')
+      endif
+      if main == ''
+        let main = GetJSONFieldValue(pkg, 'browser')
+      endif
+      if main == ''
         let main = 'index'
-      else
-        let main = substitute(main, '.*"main" *: *"', '', '')
-        let main = substitute(main, '".*', '', '')
       endif
       let filename = filename . '/' . main
     elseif (FindFileOrDir(filename . '/index') != '')
