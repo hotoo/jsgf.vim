@@ -4,7 +4,9 @@ This plugin improves Vim's `gf` command when navigating JavaScript imports.
 
 Support:
 
-* CommonJS (node_modules, package.json:main, /index.<supported suffixes>)
+* ES Module (package.json:module)
+* CommonJS (node_modules, package.json:main, /index.&lt;supported suffixes&gt;)
+* Browserify module (package.json:browser)
 * Vue.js (*.vue)
 * JSON (*.json)
 * React (*.jsx)
@@ -12,11 +14,18 @@ Support:
 
 ## Installation
 
+[vim-plug](https://github.com/junegunn/vim-plug)
+
+```viml
+Plug 'hotoo/jsgf.vim'
+```
+
 Vundle:
 
 ```viml
 Plugin 'hotoo/jsgf.vim'
 ```
+
 ## Usage
 
 - `gf` in normal mode: goto file in current buffer.
