@@ -87,7 +87,9 @@ function! JSGF(filepath, open)
   endif
 
   if !filereadable(filename) && !isdirectory(filename)
-    echoerr 'E447: Can not find file "' . filename . '" in path [jsgf.vim].'
+    echohl ErrorMsg
+    echomsg 'E447: Can not find file "' . filename . '" in path [jsgf.vim].'
+    echohl None
     return
   endif
 
@@ -102,5 +104,5 @@ function! JSGF(filepath, open)
 endfunction
 
 autocmd FileType javascript,javascriptreact,typescriptreact,json,typescript,vue call InitJSGF()
-autocmd FileType javascript,javascriptreact,typescriptreact,json,typescript,vue nmap <buffer> gf :call JSGF('<C-R><C-P>', g:jsgf_option_open)<CR><CR>
-autocmd FileType javascript,javascriptreact,typescriptreact,json,typescript,vue nmap <buffer> <C-w>gf :call JSGF('<C-R><C-P>', 'tabnew')<CR><CR>
+autocmd FileType javascript,javascriptreact,typescriptreact,json,typescript,vue nnoremap <buffer><silent> gf :silent call JSGF('<C-R><C-P>', g:jsgf_option_open)<CR>
+autocmd FileType javascript,javascriptreact,typescriptreact,json,typescript,vue nnoremap <buffer><silent> <C-w>gf :silent call JSGF('<C-R><C-P>', 'tabnew')<CR>
