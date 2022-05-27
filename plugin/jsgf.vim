@@ -11,6 +11,12 @@ if !exists('g:jsgf_option_open')
   let g:jsgf_option_open = 'e'
 endif
 
+" Replace root alias name like '@/mode-name' to '<ROOT>/mode-name'
+function! ReplaceRootAliasPath(fname)
+  let filename = substitute(a:fname, '^@\/', '', '')
+  return filename
+endfunction
+
 function! InitJSGF()
   setlocal suffixesadd+=.ts,.tsx,.jsx,.vue,.json,.js
   setlocal isfname+=@-@
@@ -23,6 +29,7 @@ function! InitJSGF()
   execute 'setlocal path+=' . node_modules
   execute 'setlocal path+=' . srcRoot
   execute 'setlocal path+=' . pkgJsonRoot
+  set includeexpr=ReplaceRootAliasPath(v:fname)
 endfunction
 
 function! FindFileOrDir(filename)
