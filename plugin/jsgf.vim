@@ -113,3 +113,5 @@ endfunction
 autocmd FileType javascript,javascriptreact,typescriptreact,json,typescript,vue call InitJSGF()
 autocmd FileType javascript,javascriptreact,typescriptreact,json,typescript,vue nnoremap <buffer><silent> gf :silent call JSGF('<C-R><C-P>', g:jsgf_option_open)<CR>
 autocmd FileType javascript,javascriptreact,typescriptreact,json,typescript,vue nnoremap <buffer><silent> <C-w>gf :silent call JSGF('<C-R><C-P>', 'tabnew')<CR>
+autocmd FileType javascript,javascriptreact,typescriptreact,json,typescript,vue nnoremap <buffer><silent> tgf :silent call JSGF('<C-R><C-P>', 'tabnew')<CR>
+autocmd FileType javascript,javascriptreact,typescriptreact,json,typescript,vue nnoremap <buffer><silent> vgf :silent call JSGF('<C-R><C-P>', 'vnew')<CR>
