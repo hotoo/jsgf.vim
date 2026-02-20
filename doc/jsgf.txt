@@ -15,7 +15,7 @@ CONTENTS                                                    *jsgf-contents*
 ==============================================================================
 1. Intro                                                             *jsgf*
 
-JSGF is an imporved `gf` mappings for JavaScript. Support CommonJS for now.
+JSGF is an imporved `gf` mappings for JavaScript. Support CommonJS and ES Modules (.mjs, .cjs).
 
 For example in JavaScript file: >
   const ma = require('module-a');

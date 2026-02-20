@@ -11,6 +11,7 @@ Support:
 * JSON (*.json)
 * React (*.jsx)
 * TypeScript (*.ts, *.tsx)
+* Node module files (*.mjs, *.cjs)
 
 ## Installation
 
