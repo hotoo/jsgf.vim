@@ -4,13 +4,14 @@ This plugin improves Vim's `gf` command when navigating JavaScript imports.
 
 Support:
 
-* ES Module (package.json:module)
-* CommonJS (node_modules, package.json:main, /index.&lt;supported suffixes&gt;)
+* JavaScript (*.js)
+* ES Module (*.mjs, package.json:module)
+* CommonJS (*.cjs, node_modules, package.json:main, /index.&lt;supported suffixes&gt;)
 * Browserify module (package.json:browser)
 * Vue.js (*.vue)
 * JSON (*.json)
-* React (*.jsx)
-* TypeScript (*.ts, *.tsx)
+* React (*.jsx, *.tsx)
+* TypeScript (*.ts)
 
 ## Installation
 

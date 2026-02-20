@@ -18,7 +18,7 @@ function! ReplaceRootAliasPath(fname)
 endfunction
 
 function! InitJSGF()
-  setlocal suffixesadd+=.ts,.tsx,.jsx,.vue,.json,.js
+  setlocal suffixesadd+=.ts,.tsx,.jsx,.vue,.json,.mjs,.cjs,.js
   setlocal isfname+=@-@
 
   let node_modules = finddir('node_modules', expand('%:p:h') . ';')
